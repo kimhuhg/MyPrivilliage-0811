@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="MyPrivilliage-0811:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="com.firstSSM.war">
+      <element id="artifact" artifact-name="MyPrivilliage-0811:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.Role" >
+
+	<select id="findRoleByRoleid" parameterType="java.lang.Integer" resultMap="roleinfo">
+		select roleid,role_cn,role_en,role_desc,role_status from role where roleid=#{roleid}
+	</select>
+	
+	<resultMap type="cn.sz.gl.pojo.Role" id="roleinfo">
+		<id property="roleid" column="roleid" />
+		<result property="roleCn" column="role_cn" />
+		<result property="roleEn" column="role_en" />
+		<result property="roleDesc" column="role_desc" />
+		<result property="roleStatus" column="role_status" />
+		<collection property="prilist" column="roleid" javaType="java.util.ArrayList" ofType="com.kimhuhg.pojo.Priviliage" select="com.kimhuhg.pojo.Priviliage.findPriByRoleid" ></collection>
+	</resultMap>
+	
+	<select id="findOnlyRoleByRoleid" parameterType="java.lang.Integer" resultType="com.kimhuhg.pojo.Role">
+		select roleid,role_cn as roleCn from role where roleid=#{roleid}
+	</select>
+	
+	<select id="findallRole" resultType="com.kimhuhg.pojo.Role">
+		select roleid,role_cn as roleCn from role where roleid!=1
+	</select>
+	
+	
+	<select id="findRoleSplit" parameterType="java.util.Map" resultType="com.kimhuhg.pojo.Role" >
+		select roleid,role_cn as roleCn,role_en as roleEn ,role_desc as roleDesc,role_status as roleStatus from role 
+		 where roleid!=1 limit #{start},#{ps}
+	</select>
+	
+	<select id="countRole" resultType="java.lang.Integer">
+		select count(roleid) from role
+	</select>
+	
+</mapper>
